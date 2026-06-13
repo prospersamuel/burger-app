@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./BurgerCanvas.module.css";
 
 const FRAME_COUNT = 240;
 
@@ -15,12 +14,12 @@ export default function BurgerCanvas() {
     const loadImages = async () => {
       const imgArray: HTMLImageElement[] = new Array(FRAME_COUNT);
       let loadedCount = 0;
-      
+
       for (let i = 1; i <= FRAME_COUNT; i++) {
         const img = new Image();
         const frameNumber = i.toString().padStart(3, "0");
         img.src = `/sequence/ezgif-frame-${frameNumber}.jpg`;
-        
+
         await new Promise((resolve) => {
           img.onload = () => {
             loadedCount++;
@@ -33,7 +32,7 @@ export default function BurgerCanvas() {
           };
           img.onerror = () => {
             resolve(true);
-          }
+          };
         });
       }
     };
@@ -89,11 +88,11 @@ export default function BurgerCanvas() {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      
+
       if (maxScroll <= 0) return;
 
       const scrollFraction = Math.max(0, Math.min(1, scrollTop / maxScroll));
-      
+
       const frameIndex = Math.min(
         FRAME_COUNT - 1,
         Math.floor(scrollFraction * FRAME_COUNT)
@@ -124,9 +123,21 @@ export default function BurgerCanvas() {
   }, [loaded, images]);
 
   return (
-    <div className={styles.canvasContainer}>
-      {!loaded && <div className={styles.loader}>Loading Experience...</div>}
-      <canvas ref={canvasRef} className={styles.canvas} />
+    <div className="fixed top-0 left-0 z-[-1] flex h-screen w-screen items-center justify-center bg-bg-primary">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.70) 30%, rgba(5,5,5,0.15) 55%, rgba(5,5,5,0) 70%)",
+        }}
+        aria-hidden="true"
+      />
+      {!loaded && (
+        <div className="absolute animate-pulse text-sm tracking-[0.1em] text-text-secondary">
+          Loading Experience...
+        </div>
+      )}
+      <canvas ref={canvasRef} className="block h-full w-full object-cover" />
     </div>
   );
 }

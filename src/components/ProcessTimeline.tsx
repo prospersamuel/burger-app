@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./ProcessTimeline.module.css";
 
 const steps = [
   {
@@ -42,15 +41,30 @@ const steps = [
 
 export default function ProcessTimeline() {
   return (
-    <ol className={styles.timeline}>
-      {steps.map((step) => (
-        <li key={step.number} className={styles.step}>
-          <div className={styles.marker}>
-            <span className={styles.number}>{step.number}</span>
+    <ol className="relative mx-auto max-w-3xl list-none px-[8%] pb-[140px] sm:px-[6%] sm:pb-[100px]">
+      <div
+        className="absolute top-7 bottom-7 left-[calc(8%+27px)] w-px bg-white/[0.08] sm:left-[27px]"
+        aria-hidden="true"
+      />
+      {steps.map((step, i) => (
+        <li
+          key={step.number}
+          className={`relative flex gap-8 sm:gap-5 ${
+            i === steps.length - 1 ? "pb-0" : "pb-16"
+          }`}
+        >
+          <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/10 bg-bg-primary sm:h-11 sm:w-11">
+            <span className="font-display text-base font-bold text-gold">
+              {step.number}
+            </span>
           </div>
-          <div className={styles.content}>
-            <h3 className={styles.stepTitle}>{step.title}</h3>
-            <p className={styles.stepCopy}>{step.description}</p>
+          <div className="flex-1 pt-2">
+            <h3 className="font-display mb-3 text-[26px] font-bold tracking-tight text-text-primary sm:text-[22px]">
+              {step.title}
+            </h3>
+            <p className="max-w-[480px] text-base leading-relaxed text-text-secondary">
+              {step.description}
+            </p>
           </div>
         </li>
       ))}

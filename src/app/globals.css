@@ -1,19 +1,23 @@
 @import "tailwindcss";
-:root {
-  --background-primary: #050505;
-  --background-secondary: #0A0A0C;
-  --text-primary: rgba(255, 255, 255, 0.9);
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --accent-gold: #E6B800;
-  --accent-secondary: #FF8A00;
+
+@theme {
+  --color-bg-primary: #050505;
+  --color-bg-secondary: #0a0a0c;
+  --color-text-primary: rgba(255, 255, 255, 0.9);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-gold: #e6b800;
+  --color-ember: #ff8a00;
+  --font-display: "SF Pro Display", "Inter", sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--background-primary);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Neue Haas Grotesk", Arial, sans-serif;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter",
+    "Neue Haas Grotesk", Arial, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,7 +28,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background-primary);
+  background: var(--color-bg-primary);
 }
 ::-webkit-scrollbar-thumb {
   background: #333;
@@ -32,4 +36,16 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

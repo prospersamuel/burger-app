@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./IngredientStack.module.css";
 
 const layers = [
   {
@@ -60,27 +59,39 @@ export default function IngredientStack() {
   const current = layers[active];
 
   return (
-    <section className={styles.stackSection}>
-      <div className={styles.stack}>
+    <section className="flex items-stretch gap-16 px-[8%] pb-[140px] max-[900px]:flex-col max-[900px]:gap-8">
+      <div className="flex max-w-[460px] flex-1 flex-col gap-2.5 max-[900px]:max-w-none">
         {layers.map((layer, i) => (
           <button
             key={layer.name}
             type="button"
-            className={`${styles.layer} ${active === i ? styles.layerActive : ""}`}
+            className={`flex h-[58px] items-center rounded-xl px-6 text-left shadow-lg transition-all duration-250 ease-out focus-visible:outline focus-visible:outline-text-primary focus-visible:outline-offset-2 ${
+              active === i
+                ? "translate-x-7 opacity-100 shadow-[0_8px_28px_rgba(230,184,0,0.25)] max-[900px]:translate-x-3.5"
+                : "translate-x-0 opacity-70"
+            }`}
             style={{ background: layer.color }}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
             onClick={() => setActive(i)}
           >
-            <span className={styles.layerName}>{layer.name}</span>
+            <span className="text-[15px] font-semibold tracking-tight text-bg-primary">
+              {layer.name}
+            </span>
           </button>
         ))}
       </div>
-      <div className={styles.detail}>
-        <span className={styles.detailTag}>{current.tag}</span>
-        <h2 className={styles.detailTitle}>{current.name}</h2>
-        <p className={styles.detailCopy}>{current.description}</p>
-        <div className={styles.detailIndex}>
+      <div className="relative flex min-h-[420px] flex-1 flex-col justify-center rounded-[20px] border border-white/5 bg-bg-secondary p-12">
+        <span className="mb-4 text-xs font-semibold tracking-[0.15em] text-gold uppercase">
+          {current.tag}
+        </span>
+        <h2 className="font-display mb-4 text-[32px] font-bold tracking-tight text-text-primary">
+          {current.name}
+        </h2>
+        <p className="max-w-[440px] text-base leading-relaxed text-text-secondary">
+          {current.description}
+        </p>
+        <div className="absolute bottom-8 right-10 text-[13px] tracking-[0.1em] text-text-secondary">
           {String(active + 1).padStart(2, "0")} / {String(layers.length).padStart(2, "0")}
         </div>
       </div>
