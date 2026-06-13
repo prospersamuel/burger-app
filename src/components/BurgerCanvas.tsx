@@ -10,35 +10,42 @@ export default function BurgerCanvas() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Preload images
-    const loadImages = async () => {
-      const imgArray: HTMLImageElement[] = new Array(FRAME_COUNT);
-      let loadedCount = 0;
+  const firstImage = new Image();
 
-      for (let i = 1; i <= FRAME_COUNT; i++) {
-        const img = new Image();
-        const frameNumber = i.toString().padStart(3, "0");
-        img.src = `/sequence/ezgif-frame-${frameNumber}.jpg`;
+  firstImage.src = "/sequence/ezgif-frame-001.jpg";
 
-        await new Promise((resolve) => {
-          img.onload = () => {
-            loadedCount++;
-            imgArray[i - 1] = img;
-            if (loadedCount === FRAME_COUNT) {
-              setImages(imgArray);
-              setLoaded(true);
-            }
-            resolve(true);
-          };
-          img.onerror = () => {
-            resolve(true);
-          };
-        });
-      }
-    };
+  firstImage.onload = () => {
+    setImages([firstImage]);
+    setLoaded(true);
+  };
+}, []);
 
-    loadImages();
-  }, []);
+useEffect(() => {
+  const loadRemaining = async () => {
+    const promises = [];
+
+    for (let i = 2; i <= FRAME_COUNT; i++) {
+      const frameNumber = i.toString().padStart(3, "0");
+
+      promises.push(
+        new Promise<HTMLImageElement>((resolve) => {
+          const img = new Image();
+
+          img.src = `/sequence/ezgif-frame-${frameNumber}.jpg`;
+
+          img.onload = () => resolve(img);
+          img.onerror = () => resolve(img);
+        })
+      );
+    }
+
+    const remaining = await Promise.all(promises);
+
+    setImages((prev) => [prev[0], ...remaining]);
+  };
+
+  loadRemaining();
+}, []);
 
   useEffect(() => {
     if (!loaded || !canvasRef.current || images.length === 0) return;
