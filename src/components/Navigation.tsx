@@ -43,7 +43,7 @@ export default function Navigation() {
           href="/"
           className="font-display text-sm font-semibold tracking-wide text-text-primary no-underline"
         >
-          G BURGER
+          Burger Kingdom
         </Link>
       </div>
 

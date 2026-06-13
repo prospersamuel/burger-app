@@ -81,7 +81,7 @@ export default function ScrollStory() {
             className="mb-3 text-[13px] font-semibold tracking-[0.15em] text-gold uppercase"
             style={{ textShadow: textShadowSub }}
           >
-            G Burger
+            Burger Kingdom
           </p>
           <h1
             className="font-display mb-5 text-[56px] font-bold leading-[1.06] tracking-tight text-text-primary max-[768px]:text-[38px]"

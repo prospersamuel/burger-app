@@ -7,7 +7,7 @@ import CartDrawer from "@/components/CartDrawer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "G Burger",
+  title: "Burger Kingdom",
   description:
     "A premium burger experience designed with precision, flavor, and balance.",
 };

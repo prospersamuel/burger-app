@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
       </div>
       <p className="mt-10 text-xs text-text-secondary">
-        Crafted layer by layer. &copy; {new Date().getFullYear()} G Burger.
+        Crafted layer by layer. &copy; {new Date().getFullYear()} Burger Kingdom.
       </p>
     </footer>
   );
