@@ -213,16 +213,16 @@ export default function ScrollStory() {
           >
             Order now and experience every layer.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col lg:flex-row gap-4">
             <Link
               href="/order"
-              className="rounded-full bg-gold px-8 py-4 text-base font-semibold text-bg-primary transition-all duration-200 hover:scale-105 hover:opacity-90"
+              className="rounded-full w-fit bg-gold px-8 py-4 text-base font-semibold text-bg-primary transition-all duration-200 hover:scale-105 hover:opacity-90"
             >
               Order Now
             </Link>
             <Link
               href="/ingredients"
-              className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-base font-semibold text-text-primary backdrop-blur-md transition-colors duration-200 hover:bg-white/20"
+              className="rounded-full w-fit border border-white/20 bg-white/10 px-8 py-4 text-base font-semibold text-text-primary backdrop-blur-md transition-colors duration-200 hover:bg-white/20"
             >
               View Ingredients
             </Link>
